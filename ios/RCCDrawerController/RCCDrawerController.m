@@ -134,6 +134,14 @@ UIViewController *rightViewController = nil;
     if ([performAction isEqualToString:@"setDrawerEnabled"])
     {
         bool enabled = [actionParams[@"enabled"] boolValue];
+        bool openGestureEnabled = actionParams[@"openGestureEnabled"] ? [actionParams[@"openGestureEnabled"] boolValue] : YES;
+        
+        if (openGestureEnabled) {
+            self.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
+        } else {
+            self.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
+        }
+        
         if ([actionParams[@"side"] isEqualToString:@"left"]) {
             [super setLeftDrawerViewController: enabled ? leftViewController : nil];
         } else if ([actionParams[@"side"] isEqualToString:@"right"]) {
